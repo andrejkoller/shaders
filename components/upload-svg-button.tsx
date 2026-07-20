@@ -4,9 +4,13 @@ import { useRef, type ChangeEvent } from "react";
 
 interface UploadSvgButtonProps {
   onUpload: (dataUrl: string) => void;
+  className?: string;
 }
 
-export default function UploadSvgButton({ onUpload }: UploadSvgButtonProps) {
+export default function UploadSvgButton({
+  onUpload,
+  className,
+}: UploadSvgButtonProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +46,7 @@ export default function UploadSvgButton({ onUpload }: UploadSvgButtonProps) {
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className="fixed bottom-6 right-6 z-20 rounded-md bg-(--color-foreground) px-4 py-2 tracking-wide text-(--color-background) transition-colors hover:bg-(--color-foreground)/90 focus:bg-(--color-foreground)/90 focus:outline-none"
+        className={`rounded-md bg-(--color-foreground) px-4 py-2 tracking-wide text-(--color-background) transition-colors hover:bg-(--color-foreground)/90 focus:bg-(--color-foreground)/90 focus:outline-none ${className ?? ""}`}
       >
         Upload SVG
       </button>

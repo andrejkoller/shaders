@@ -22,7 +22,7 @@ export default function Header({ active, onSelect }: HeaderProps) {
             className={`tracking-wide transition-colors scale-95 cursor-pointer ${
               active === shader.id
                 ? "text-(--color-foreground) scale-100"
-                : "text-(--color-muted) hover:text-(--color-foreground) focus:text-(--color-foreground) focus:outline-none"
+                : "text-(--color-muted) hover:text-(--color-primary) focus:text-(--color-primary) focus:outline-none"
             }`}
           >
             {shader.label}
