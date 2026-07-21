@@ -1,5 +1,12 @@
-import ShaderApp from "../components/shaders/shader-app";
+"use client";
+
+import ShaderStage from "@/components/shaders/shader-stage";
+import { ShaderId } from "@/components/shaders/types";
+import { useState } from "react";
 
 export default function Home() {
-  return <ShaderApp />;
+  const [imageSrc] = useState("/triangle.svg");
+  const [shaderId] = useState<ShaderId>("chrome");
+
+  return <ShaderStage shaderId={shaderId} imageSrc={imageSrc} />;
 }

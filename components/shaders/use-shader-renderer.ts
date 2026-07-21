@@ -43,7 +43,7 @@ export function useShaderRenderer({
     gl.bufferData(
       gl.ARRAY_BUFFER,
       new Float32Array([-1, -1, 3, -1, -1, 3]),
-      gl.STATIC_DRAW
+      gl.STATIC_DRAW,
     );
 
     const texture = gl.createTexture();
@@ -62,14 +62,18 @@ export function useShaderRenderer({
       0,
       gl.RGBA,
       gl.UNSIGNED_BYTE,
-      new Uint8Array([0, 0, 0, 0])
+      new Uint8Array([0, 0, 0, 0]),
     );
     textureRef.current = texture;
 
     const getProgram = (id: ShaderId) => {
       const cached = programs.get(id);
       if (cached) return cached;
-      const program = compileProgram(gl, VERTEX_SHADER, buildFragmentShader(id));
+      const program = compileProgram(
+        gl,
+        VERTEX_SHADER,
+        buildFragmentShader(id),
+      );
       if (program) programs.set(id, program);
       return program;
     };
@@ -116,16 +120,16 @@ export function useShaderRenderer({
         gl.uniform2f(
           gl.getUniformLocation(program, "u_resolution"),
           canvas.width,
-          canvas.height
+          canvas.height,
         );
         gl.uniform1f(
           gl.getUniformLocation(program, "u_time"),
-          (performance.now() - start) / 1000
+          (performance.now() - start) / 1000,
         );
         gl.uniform2f(
           gl.getUniformLocation(program, "u_mouse"),
           mouse[0],
-          mouse[1]
+          mouse[1],
         );
 
         gl.clearColor(0, 0, 0, 0);
@@ -135,7 +139,7 @@ export function useShaderRenderer({
           gl.SRC_ALPHA,
           gl.ONE_MINUS_SRC_ALPHA,
           gl.ONE,
-          gl.ONE_MINUS_SRC_ALPHA
+          gl.ONE_MINUS_SRC_ALPHA,
         );
         gl.drawArrays(gl.TRIANGLES, 0, 3);
       }
@@ -180,7 +184,14 @@ export function useShaderRenderer({
       ctx.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
 
       gl.bindTexture(gl.TEXTURE_2D, textureRef.current);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, offscreen);
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        offscreen,
+      );
     };
     img.src = imageSrc;
 

@@ -46,7 +46,7 @@ export default function UploadSvgButton({
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className={`rounded-md bg-(--color-foreground) px-4 py-2 tracking-wide text-(--color-background) transition-colors hover:bg-(--color-foreground)/90 focus:bg-(--color-foreground)/90 focus:outline-none ${className ?? ""}`}
+        className={`cursor-pointer rounded-md bg-(--color-foreground) px-4 py-2 tracking-wide text-(--color-background) transition-colors hover:bg-(--color-foreground)/90 focus:bg-(--color-foreground)/90 focus:outline-none ${className ?? ""}`}
       >
         Upload SVG
       </button>
